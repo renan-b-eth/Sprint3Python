@@ -15,8 +15,7 @@ class Main():
     def qtd_linhas(df):
         qtd_linhas = len(df)
         return qtd_linhas
-    
-   
+
     def qtd_clicks(df, qtd_clicks):
         i = 0
         qtd_header = 0
@@ -27,7 +26,7 @@ class Main():
             if(df["Y Position"].values[i] < 100):
                 qtd_header = qtd_header + 1
                 i = i+1
-                print("entrou aqui")
+                #print("entrou aqui")
             elif((df["Y Position"].values[i] > 150) and (df["Y Position"].values[i] < 500)):
                 qtd_main = qtd_main + 1
                 i = i+1
@@ -42,27 +41,24 @@ class Main():
         
         return qtd_clicks_totais
     
-
-     
     def porcentagem(df, qtd_clicks):
         qtd_total_clicks = qtd_clicks["qtd_header"] + qtd_clicks["qtd_main"] + qtd_clicks["qtd_footer"]
         porcentagem_total = 100
-        porcentagem_header = 0
-        porcentagem_main = 0
-        porcentagem_footer = 0
-
         porcentagem_header = (qtd_clicks["qtd_header"] * 100) / qtd_total_clicks
         porcentagem_main = (qtd_clicks["qtd_main"] * 100) / qtd_total_clicks
         porcentagem_footer = (qtd_clicks["qtd_footer"] * 100) / qtd_total_clicks
         
-        porcentagens = {'por_header': porcentagem_header,
-            'por_main': porcentagem_main,
-            'por_footer': porcentagem_footer
+        porcentagens = {'por_header': round(porcentagem_header,2),
+            'por_main': round(porcentagem_main,2),
+            'por_footer': round(porcentagem_footer,2)
             } 
 
         return porcentagens
     
+    
     clicks = qtd_clicks(df,60)
+
+        
     print(qtd_clicks(df,60))
     print(porcentagem(df, clicks))
 
