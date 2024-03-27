@@ -4,8 +4,6 @@ import matplotlib.pyplot as plt
 
 # realizar a % de tempo que o usuario clica na tela e quantos clicks.
 class Main():
-
-
     df = pd.read_csv("./Sprint3Python/dados/click_data.csv")
 
     def ler_csv():
