@@ -8,26 +8,36 @@ import os
 # realizar a % de tempo que o usuario clica na tela e quantos clicks.
 class Main():
 
-    
+    #realize a leitura de arquivos sem espaço para não houver erros.    
 
     def ler_diretorio():
          # Cria uma janela Tk oculta para evitar a exibição da janela principal
-        janela_padrao = Tk().withdraw()
-        filename = fd.askopenfilename()
+        try:
+            janela_padrao = Tk().withdraw()
+            filename = fd.askopenfilename()
 
-        # Obtém o diretório do arquivo selecionado
-        diretorio = os.path.dirname(filename)
+            # Obtém o diretório do arquivo selecionado
+            diretorio = os.path.dirname(filename)
 
-        # Obtém o nome do arquivo selecionado
-        nome_arquivo = os.path.basename(filename)
+            # Obtém o nome do arquivo selecionado
+            nome_arquivo = os.path.basename(filename)
 
-        diretorio_completo = diretorio + "/" + nome_arquivo
+            diretorio_completo = diretorio + "/" + nome_arquivo
 
-        # Separando o diretório pelos '/'
-        partes_do_diretorio = diretorio_completo.split('/')
+            # Separando o diretório pelos '/'
+            partes_do_diretorio = diretorio_completo.split('/')
 
-        diretorio_correto = "./"+partes_do_diretorio[5]+"/"+partes_do_diretorio[6]+"/"+partes_do_diretorio[7]
-
+            diretorio_correto = "./"+partes_do_diretorio[5]+"/"+partes_do_diretorio[6]+"/"+partes_do_diretorio[7]
+        except IndexError:
+            # Tratamento de erro para caso o índice não exista
+            print("Indice fora dos limites do diretorio.")
+        else:
+            # Código que será executado se não houver exceção
+            print("Acesso a parte do diretorio foi bem-sucedido.")
+        finally:
+            # Código que será executado independentemente de uma exceção ocorrer ou não
+            print("Operacao concluida.")
+        
         return diretorio_correto
     
 
@@ -45,28 +55,32 @@ class Main():
         return qtd_linhas
 
     def qtd_clicks(df, qtd_clicks):
-        i = 0
-        qtd_header = 0
-        qtd_main = 0
-        qtd_footer = 0
-        qtd_clicks_totais = {}
-        while i < qtd_clicks:
-            if(df["Y Position"].values[i] < 100):
-                qtd_header = qtd_header + 1
-                i = i+1
-                #print("entrou aqui")
-            elif((df["Y Position"].values[i] > 150) and (df["Y Position"].values[i] < 500)):
-                qtd_main = qtd_main + 1
-                i = i+1
-            else:
-                qtd_footer = qtd_footer + 1
-                i = i+1
-        qtd_clicks_totais = {'qtd_header': qtd_header,
-            'qtd_main': qtd_main,
-            'qtd_footer': qtd_footer
-            } 
-               
-        
+        try:
+            i = 0
+            qtd_header = 0
+            qtd_main = 0
+            qtd_footer = 0
+            qtd_clicks_totais = {}
+            while i < qtd_clicks:
+                if(df["Y Position"].values[i] < 100):
+                    qtd_header = qtd_header + 1
+                    i = i+1
+                    #print("entrou aqui")
+                elif((df["Y Position"].values[i] > 150) and (df["Y Position"].values[i] < 500)):
+                    qtd_main = qtd_main + 1
+                    i = i+1
+                else:
+                    qtd_footer = qtd_footer + 1
+                    i = i+1
+            qtd_clicks_totais = {'qtd_header': qtd_header,
+                'qtd_main': qtd_main,
+                'qtd_footer': qtd_footer
+                } 
+        except IndexError:
+            print("Seleciona um arquivo sem espaco no .cvs")
+        finally:
+            print("TRY FEITO")
+
         return qtd_clicks_totais
     
     def porcentagem(df, qtd_clicks):
@@ -86,7 +100,6 @@ class Main():
     
     clicks = qtd_clicks(df,60)
 
-    ler_diretorio()
         
     print(qtd_clicks(df,60))
     print(porcentagem(df, clicks))
