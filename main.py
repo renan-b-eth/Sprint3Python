@@ -34,6 +34,7 @@ class Main():
         else:
             # Código que será executado se não houver exceção
             print("Acesso a parte do diretorio foi bem-sucedido.")
+            print(diretorio_correto) # AQUI ELE LE E IMPRIME MAS NO READ_CVS ELE NÃO ENTENDE O ESPAÇO.
         finally:
             # Código que será executado independentemente de uma exceção ocorrer ou não
             print("Operacao concluida.")
@@ -84,18 +85,23 @@ class Main():
         return qtd_clicks_totais
     
     def porcentagem(df, qtd_clicks):
-        qtd_total_clicks = qtd_clicks["qtd_header"] + qtd_clicks["qtd_main"] + qtd_clicks["qtd_footer"]
-        porcentagem_total = 100
-        porcentagem_header = (qtd_clicks["qtd_header"] * 100) / qtd_total_clicks
-        porcentagem_main = (qtd_clicks["qtd_main"] * 100) / qtd_total_clicks
-        porcentagem_footer = (qtd_clicks["qtd_footer"] * 100) / qtd_total_clicks
-        
-        porcentagens = {'por_header': round(porcentagem_header,2),
-            'por_main': round(porcentagem_main,2),
-            'por_footer': round(porcentagem_footer,2)
-            } 
+        try:
+            qtd_total_clicks = qtd_clicks["qtd_header"] + qtd_clicks["qtd_main"] + qtd_clicks["qtd_footer"]
+            porcentagem_header = (qtd_clicks["qtd_header"] * 100) / qtd_total_clicks
+            porcentagem_main = (qtd_clicks["qtd_main"] * 100) / qtd_total_clicks
+            porcentagem_footer = (qtd_clicks["qtd_footer"] * 100) / qtd_total_clicks
+            
+            porcentagens = {'por_header': round(porcentagem_header,2),
+                'por_main': round(porcentagem_main,2),
+                'por_footer': round(porcentagem_footer,2)
+                }
+            return porcentagens
+        except KeyError as err:
+            print("ERRO DE CHAVE POIS O ARQUIVO FOI LIDO COM ESPAÇO NO .CVS ( ERRO PROPOSITAL PARA O TRATAMENTO DE ERRO ) EU PODERIA TIRAR COM .SLIP erro no :" + str(err))
+        except UnboundLocalError:
+            print("A VARIAVEL PORCENTAGEM NÃO VAI RETORNAR POIS O ARQUIVO .CVS FOI LIDO COM ESPAÇO ( ERRO PROPOSITAL )")
+        return ""
 
-        return porcentagens
     
     def onde_teve_mais_nav(df):
         if(df["qtd_header"] > df["qtd_main"] and df["qtd_header"] > df["qtd_footer"]):
@@ -105,14 +111,20 @@ class Main():
         else:
              print("O FOOTER TEVE MAIS CLICKS COM: " + str(df["qtd_footer"]))
         return ""
-    
-    clicks = qtd_clicks(df,60)
 
     qtd_clicks2= qtd_clicks(df,60)
-    porcentagem_2 = porcentagem(df, clicks)
-    print("QTD CLICKS NO HEADER: " + str(qtd_clicks2["qtd_header"]) + "\nQTD CLICKS NO MAIN: " + str(qtd_clicks2["qtd_main"]) + "\nQTD CLICKS NO FOOTER: " + str(qtd_clicks2["qtd_footer"]) + "\n\n")
-    print("PORCENTAGEM DE CLICKS NO HEADER: " + str(porcentagem_2["por_header"]) + "%\nPORCENTAGEM DE CLICKS NO MAIN: " + str(porcentagem_2["por_main"]) + "%\nPORCENTAGEM DE CLICKS NO FOOTER: " + str(porcentagem_2["por_footer"])+"%\n")
-    print(onde_teve_mais_nav(qtd_clicks2))
+    porcentagem_2 = porcentagem(df, qtd_clicks(df,60))
+
+    try:
+        print("QTD CLICKS NO HEADER: " + str(qtd_clicks2["qtd_header"]) + "\nQTD CLICKS NO MAIN: " + str(qtd_clicks2["qtd_main"]) + "\nQTD CLICKS NO FOOTER: " + str(qtd_clicks2["qtd_footer"]) + "\n\n")
+        print("PORCENTAGEM DE CLICKS NO HEADER: " + str(porcentagem_2["por_header"]) + "%\nPORCENTAGEM DE CLICKS NO MAIN: " + str(porcentagem_2["por_main"]) + "%\nPORCENTAGEM DE CLICKS NO FOOTER: " + str(porcentagem_2["por_footer"])+"%\n")
+        print(onde_teve_mais_nav(qtd_clicks2))
+    except KeyError as err:
+        print("ERRO DE CHAVE POIS O ARQUIVO FOI LIDO COM ESPACO NO .CVS ( ERRO PROPOSITAL PARA O TRATAMENTO DE ERRO ) EU PODERIA TIRAR COM .SLIP erro no :" + str(err))
+    except UnboundLocalError:
+        print("A VARIAVEL PORCENTAGEM NÃO VAI RETORNAR POIS O ARQUIVO .CVS FOI LIDO COM ESPAÇO ( ERRO PROPOSITAL )")
+
+    
 
 
 
