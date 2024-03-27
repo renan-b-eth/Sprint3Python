@@ -97,12 +97,24 @@ class Main():
 
         return porcentagens
     
+    def onde_teve_mais_nav(df):
+        if(df["qtd_header"] > df["qtd_main"] and df["qtd_header"] > df["qtd_footer"]):
+            print("O HEADER TEVE MAIS CLICKS COM: " + str(df["qtd_header"]))
+        elif(df["qtd_main"] > df["qtd_header"] and df["qtd_main"] > df["qtd_footer"]):
+             print("O MAIN TEVE MAIS CLICKS COM: " + str(df["qtd_main"]))
+        else:
+             print("O FOOTER TEVE MAIS CLICKS COM: " + str(df["qtd_footer"]))
+        return ""
     
     clicks = qtd_clicks(df,60)
 
-        
-    print(qtd_clicks(df,60))
-    print(porcentagem(df, clicks))
+    qtd_clicks2= qtd_clicks(df,60)
+    porcentagem_2 = porcentagem(df, clicks)
+    print("QTD CLICKS NO HEADER: " + str(qtd_clicks2["qtd_header"]) + "\nQTD CLICKS NO MAIN: " + str(qtd_clicks2["qtd_main"]) + "\nQTD CLICKS NO FOOTER: " + str(qtd_clicks2["qtd_footer"]) + "\n\n")
+    print("PORCENTAGEM DE CLICKS NO HEADER: " + str(porcentagem_2["por_header"]) + "%\nPORCENTAGEM DE CLICKS NO MAIN: " + str(porcentagem_2["por_main"]) + "%\nPORCENTAGEM DE CLICKS NO FOOTER: " + str(porcentagem_2["por_footer"])+"%\n")
+    print(onde_teve_mais_nav(qtd_clicks2))
+
+
 
     
 
