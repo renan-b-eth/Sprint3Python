@@ -31,6 +31,8 @@ class Main():
         except IndexError:
             # Tratamento de erro para caso o índice não exista
             print("Indice fora dos limites do diretorio.")
+        except UnboundLocalError as err:
+            print("VOCÊ SAIU SEM SELECIONAR UM DIRETORIO E RETORNOU NULL " + str(err))
         else:
             # Código que será executado se não houver exceção
             print("Acesso a parte do diretorio foi bem-sucedido.")

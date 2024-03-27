@@ -40,6 +40,8 @@ def criarBotao2():
 def acessarSiteProdutos(url):
     return webbrowser.open(url)
  
+def mensagem(titulo,mgs):
+    return messagebox.showinfo(titulo,mgs)
  
 def quemSomos():
     messagebox.showinfo("Quem Somos?", "Lucas Alcântara Carvalho - 95111\nRenan Bezerra dos Santos - 553228")
@@ -52,10 +54,10 @@ opcao1 = Menu(menu, tearoff=0)
 opcao1.add_command(label= "ACESSAR LEITURA DE CVS", command= lambda: criarBotao2())
 
 crud = Menu(menu, tearoff=0)
-crud.add_command(label= "SELECT", command= lambda: print("ainda não feito em python, feito em java."))
-crud.add_command(label= "INSERT", command= lambda: print("ainda não feito em python, feito em java."))
-crud.add_command(label= "UPDATE", command= lambda: print("ainda não feito em python, feito em java."))
-crud.add_command(label= "DELETE", command= lambda: print("ainda não feito em python, feito em java."))
+crud.add_command(label= "SELECT", command= lambda: mensagem("SELECT","ainda não feito em python, feito em java."))
+crud.add_command(label= "INSERT", command= lambda: mensagem("INSERT","ainda não feito em python, feito em java."))
+crud.add_command(label= "UPDATE", command= lambda: mensagem("UPDATE","ainda não feito em python, feito em java."))
+crud.add_command(label= "DELETE", command= lambda: mensagem("DELETE","ainda não feito em python, feito em java."))
 
 opcao2 = Menu(menu, tearoff=0)
 opcao2.add_command(label= "Acessar Camera Mouse", command= lambda: criarBotao())
