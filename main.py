@@ -1,14 +1,44 @@
 import pandas as pd
 import numpy as ny
 import matplotlib.pyplot as plt
+from tkinter import Tk
+from tkinter import filedialog as fd
+import os
 
 # realizar a % de tempo que o usuario clica na tela e quantos clicks.
 class Main():
-    df = pd.read_csv("./Sprint3Python/dados/click_data.csv")
 
-    def ler_csv():
-        df = pd.read_csv("./Sprint3Python/dados/click_data.csv")
-        return df
+    
+
+    def ler_diretorio():
+         # Cria uma janela Tk oculta para evitar a exibição da janela principal
+        janela_padrao = Tk().withdraw()
+        filename = fd.askopenfilename()
+
+        # Obtém o diretório do arquivo selecionado
+        diretorio = os.path.dirname(filename)
+
+        # Obtém o nome do arquivo selecionado
+        nome_arquivo = os.path.basename(filename)
+
+        diretorio_completo = diretorio + "/" + nome_arquivo
+
+        # Separando o diretório pelos '/'
+        partes_do_diretorio = diretorio_completo.split('/')
+
+        diretorio_correto = "./"+partes_do_diretorio[5]+"/"+partes_do_diretorio[6]+"/"+partes_do_diretorio[7]
+
+        return diretorio_correto
+    
+
+    #pega o arquivo que eu selecionei.
+    diretorio = ler_diretorio()
+    df = pd.read_csv(diretorio)
+
+
+    #def ler_csv():
+        #df = pd.read_csv("./Sprint3Python/dados/click_data.csv")
+        #return df
     
     def qtd_linhas(df):
         qtd_linhas = len(df)
@@ -56,6 +86,7 @@ class Main():
     
     clicks = qtd_clicks(df,60)
 
+    ler_diretorio()
         
     print(qtd_clicks(df,60))
     print(porcentagem(df, clicks))

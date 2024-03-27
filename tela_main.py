@@ -6,14 +6,12 @@ import subprocess
 import os
 import time
 import random
-import main
+from main import Main
  
 
 
 root = Tk()
-opa = main.Main()
-
-print(opa.ler_csv())
+opa = Main()
 
 #criacao menu
 menu= Menu(root)
