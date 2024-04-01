@@ -13,7 +13,7 @@ OBS: como o site não está hospedado via deploy o arquivo .cvs ( na pasta dados
 Clone o projeto, execute o main.py, escolhe o arquivo .cvs sem espaço para o codigo rodar corretamente e retornar a quantidade de clicks que o usuario fez em cada parte da pagina ( header main e footer) e também retorna a % onde o usuario mais clicou e qual componente o usuario teve mais interatividade.
 OBS: para você realizar o erro e entrar no tramamento de try exception intencionalmente ti tem duas opcoes: ou quando for selecionar o arquivo sair sem selecionar o arquivo dara um erro, e também o erro de você selecionar o .cvs (1) que contem espaço, o erro acontece pois o read_cvs do pandas não aceita leitura de arquivos com espaço.
 
-# COMO GERAR UM ARQUIVO .CVS DA SUA PREFERENCIA?
+# COMO GERAR UM ARQUIVO .CSV DA SUA PREFERENCIA?
 
 https://github.com/renan-b-eth/InovaAcessReact4 
 
